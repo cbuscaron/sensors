@@ -1,29 +1,7 @@
 
 /******************************************************************************
-SparkFun_MS5803_Demo.ino
-Demo Program for MS5803 pressure sensors.
-Casey Kuhns @ SparkFun Electronics
-7/20/2014
-https://github.com/sparkfun/MS5803-14BA_Breakout/
-
-The MS58XX MS57XX and MS56XX by Measurement Specialties is a low cost I2C pressure
-sensor.  This sensor can be used in weather stations and for altitude
-estimations. It can also be used underwater for water depth measurements. 
-
-Resources:
-This library uses the Arduino Wire.h to complete I2C transactions.
-
-Development environment specifics:
-	IDE: Arduino 1.0.5
-	Hardware Platform: Arduino Pro 3.3V/8MHz
-	T5403 Breakout Version: 1.0
-
-**Updated for Arduino 1.6.4 5/2015**
-	
-This code is beerware. If you see me (or any other SparkFun employee) at the
-local pub, and you've found our code helpful, please buy us a round!
-
-Distributed as-is; no warranty is given.
+Camilo F. Buscaron
+June 2016
 ******************************************************************************/
 
 #include <Wire.h>
@@ -56,7 +34,11 @@ void setup() {
 }
 
 void loop() {
-  Serial.write(13);
+  //Serial.write(12);
+  Serial.write(27);       // ESC command
+  Serial.print("[2J");    // clear screen command
+  Serial.write(27);
+  Serial.print("[H");     // cursor to home command
   
   // To measure to higher degrees of precision use the following sensor settings:
   // ADC_256 
@@ -98,12 +80,17 @@ void loop() {
    
   Serial.print("Pressure relative (mbar)= ");
   Serial.println(pressure_relative); 
+
+  Serial.print("Pressure abs (psi)= ");
+  Serial.println(pressure_abs*0.0145038);
   
   Serial.print("Altitude change (m) = ");
   Serial.println(altitude_delta); 
 
+  //0.0145038
 
-  delay(1000);
+
+  delay(2000);
 
   }
   
